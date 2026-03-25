@@ -250,15 +250,21 @@ const getAndShowArticles = async () => {
 const getAndShowNavbarMenus = async () => {
   const res = await fetch("http://localhost:4000/v1/menus");
   const menus = await res.json();
+  console.log("MENUS:", menus);
+  menus.forEach((menu) => {
+    console.log("MENU:", menu.title);
+
+    menu.submenus.forEach((sub) => {
+      console.log("  SUBMENU:", sub.title);
+    });
+  });
   const menusWrapper = document.querySelector("#menus-wrapper");
   menusWrapper.innerHTML = menus
     .map((menu) => {
-      console.log(menu.href);
       let submenusHtml = "";
       submenusHtml = menu.submenus
 
         .map((submenu) => {
-          console.log(submenu.href);
           return `
             <li class="main-header__dropdown-item">
               <a href="category.html?cat=${submenu.href.split("/").pop()}" class="main-header__dropdown-link">${submenu.title}</a>

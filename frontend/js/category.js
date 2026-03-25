@@ -11,6 +11,8 @@ window.addEventListener("load", async () => {
   const responseCourses = await getAndShowCategoryCourses();
   let courses = [...responseCourses];
 
+  insertHtmlTemplate("row", courses, categoryCoursesWrapper);
+
   const coursesShowTypeIcons = document.querySelectorAll(
     ".courses-top-bar__icon-parent",
   );
